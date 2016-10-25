@@ -1,0 +1,44 @@
+
+HOW TO RUN
+----------
+
+- This code is written in python 2 so make sure you have the right version installed. 
+
+	> cd into CodeSample directory, which contains utils.py, tests.py, and User.py. 
+	> run python2 tests.py
+
+- This will run some of the test cases I have provided (see tests.py to view what test cases look like)
+
+- My total_infection and limited_infection are in utils.py. 
+
+- limited_infection algorithm can find exact number of users, or closest number of users one could infect. 
+
+
+POSSIBLE ENHANCEMENTS
+---------------------
+
+- For the User abstraction, it might be useful to add a hashing capability as well as in-depth comparison
+capabilities incase we want add a function that makes use of python's built-in dictionary
+to store intermediate user objects. 
+
+	def __hash__(self):
+		return hash((self.name, self.is_infected, self.software_vers, self.coach))
+
+	def __eq__(self, other):
+		return (self.name, self.is_infected, self.software_vers, self.coach) == (other.name, other.is_infected, other.software_vers, other.coach)
+
+	def __ne__(self, other):
+		return not(self == other)
+
+- Add "key" attribute to differentiate two different users with the same name, coach, students. 
+
+- Make it a lot more scalable by using a distributed version of dfs, preferably running job on spark since it 
+uses in-memory caching. This would be for when one has a hundreds of millions or more users. P.S. I'm not an expert
+on distributed computing, so I would have to ramp-up on that first. 
+
+- Test algorithms more vigorously to ensure more correctness i.e. add test cases with > 2 connected components. 
+
+- Add visualization for infections to get a more abstract sense of what groups would be infected should software be released 
+to them. 
+
+
