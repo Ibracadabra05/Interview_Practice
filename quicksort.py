@@ -1,19 +1,18 @@
 #quicksort algorithm
 
+def swap(x, y):
+    return y, x
+
 def partition(A, start, end):
     partition_index = start 
     pivot = A[end]
     
     for i in range(start, end):
         if A[i] <= pivot:
-            temp = A[i]
-            A[i] = A[partition_index]
-            A[partition_index] = temp
+            A[i], A[partition_index] = swap(A[i], A[partition_index])
             partition_index += 1
     
-    temp = A[end]
-    A[end] = A[partition_index]
-    A[partition_index] = temp
+    A[end], A[partition_index] = swap(A[end], A[partition_index])
     return partition_index
 
 def quicksort(A, start, end):
