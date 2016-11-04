@@ -1,0 +1,8 @@
+id,name,parent,amount
+502,cash-one,401,25
+501,cash-two,401,55
+500,cash-three,400,10
+399,cash-four,397,10
+398,cash-five,397,40
+398,cash-five,395,25
+398,cash-five,None,35

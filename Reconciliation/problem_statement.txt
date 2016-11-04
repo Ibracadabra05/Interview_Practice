@@ -1,0 +1,89 @@
+You are given a set of transactions in a CSV file, each of which is either a cash purchase
+
+or an ATM withdrawal. Starting with the most recent cash purchase, reconcile cash
+
+purchases against ATM withdrawals. The higher the date, the more recent the
+
+transaction; if two transactions have the same date, the transaction with the higher ID is
+
+the more recent. Cash purchases can only be reconciled against ATMs that have the
+
+same date or are less recent. If a cash purchase is reconciled against an ATM withdrawal
+
+and has some remaining value, then that remaining value is reconciled against the next
+
+ATM. Reconcile according to the following rules, assuming a cash purchase X, ATM
+
+withdrawal Y, and reconciliation transaction Z:
+
+1. If the amount of X is less than the amount of Y, then Y is the parent of Z and the
+
+amount of Z is the amount of X. X is finished and no longer available for reconciliation. Y
+
+is available to reconcile against the next-most-recent recent purchase in the amount of Y-
+X.
+
+Ex. 502, cash-one, 401, 25
+
+2. If the amount of X is equal to the amount of Y, then Y is the parent of Z and the amount
+
+of Z is the amount of X. X is finished and no longer available for reconciliation. Y is
+
+finished and no longer available for reconciliation.
+
+Ex. 500, cash-three, 400, 10
+
+3. If the amount of X is greater than the amount of Y, then Y is the parent of Z and the
+
+amount of Z is the amount of Y. X is available to reconcile against the next-most-recent
+
+recent ATM in the amount of X-Y. Y is finished and no longer available for reconciliation.
+
+Ex. 398, cash-five, 395, 25
+
+Return a CSV that represents the reconciliation transactions for each cash purchase in
+
+the input. Ensure that your program works for all conceivable inputs, not only the one
+
+given! You may use any libraries you see fit.
+
+Input:
+
+id, name,amount,date,is_cash,is_atm
+
+502, cash-one, 25, 2013-02-11, true, false
+
+501, cash-two, 55, 2013-02-10, true, false
+
+500, cash-three, 10, 2013-02-09, true, false
+
+401, atm-one, 80, 2013-02-07, false, true
+
+400, atm-two, 10, 2013-02-06, false, true
+
+399, cash-four, 10, 2013-02-05, true, false
+
+398, cash-five, 100, 2013-02-05, true, false
+
+397, atm-three, 50, 2013-02-04, false, true,
+
+395, atm-four, 25, 2013-02-01, false, true
+
+
+Output:
+
+id, name, parent, amount
+
+502, cash-one, 401, 25
+
+501, cash-two, 401, 55
+
+500, cash-three, 400, 10
+
+399, cash-four, 397, 10
+
+398, cash-five, 397, 40
+
+398, cash-five, 395, 25
+
+398, cash-five, null, 35
